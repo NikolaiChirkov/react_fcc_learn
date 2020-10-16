@@ -6,7 +6,9 @@ const UseEffectBasics = () => {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
-    document.title = `New messages (${value})`;
+    if (value > 0) {
+      document.title = `New messages (${value})`;
+    }
   })
 
   return (
