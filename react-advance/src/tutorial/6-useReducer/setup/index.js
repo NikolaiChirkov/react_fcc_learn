@@ -3,7 +3,23 @@ import Modal from './Modal';
 import { data } from '../../../data';
 // reducer function
 const reducer = (state, action) => {
-
+  if(action.type === 'ADD_ITEM') {
+    const newPeople = [...state.people, action.payload];
+    return {
+      ...state, 
+      people: newPeople, 
+      isModalOpen: true, 
+      modalContent: "item added"
+    }
+  }
+  if (action.type === "NO_VALUE") {
+    return {
+      ...state,
+      showModal: true,
+      modalContent: "please enter value"
+    }
+  }
+  throw new Error('no matching action type');
 }
 
 const defaultState = {
@@ -19,9 +35,10 @@ const Index = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name) {
-      
+      const newItem = { id: new Date().getTime().toString(), name }
+      dispatch({ type:'ADD_ITEM', payload: newItem });
     } else {
-      
+      dispatch({ type: "NO_VALUE" });
     }
   }
 
@@ -31,7 +48,7 @@ const Index = () => {
       <div>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
       </div>
-      <button type="submit">add</button>
+      <button className="btn" type="submit">add</button>
     </form>
     {state.people.map((person) => {
       return (
