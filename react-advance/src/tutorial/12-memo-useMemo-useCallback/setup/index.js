@@ -15,6 +15,7 @@ const calculateMostExpensive = (data) => {
     }, 0) / 100
   );
 };
+
 const Index = () => {
   const { products } = useFetch(url);
   const [count, setCount] = useState(0);
@@ -45,6 +46,7 @@ const BigList = React.memo(({ products, addToCart }) => {
   useEffect(() => {
     console.log('big list called');
   });
+
   return (
     <section className='products'>
       {products.map((product) => {
@@ -64,6 +66,7 @@ const SingleProduct = ({ fields, addToCart }) => {
   useEffect(() => {
     console.count('single item called');
   });
+  
   let { name, price } = fields;
   price = price / 100;
   const image = fields.image[0].url;
@@ -77,4 +80,5 @@ const SingleProduct = ({ fields, addToCart }) => {
     </article>
   );
 };
+
 export default Index;
